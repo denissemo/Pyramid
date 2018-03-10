@@ -1,11 +1,15 @@
 USAGE: pyramidCMD_UI.py
 
 In-game commands:
-  q - quit
+  q - quitK
   ng - new game
   n - next extra card
-  x -seleck extra card
+  x -  select extra card
   ñ - compare menu
+  h - help window
+  d - debug mode on/off
+  lvl - select game mode (Easy/Hard)
+  r - redo changes
 
 GAMEPLAY
   The object of this game is to uncover all the cards (#)
