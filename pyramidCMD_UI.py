@@ -275,7 +275,6 @@ class Game:
             system('cls')
             self._start_new_game().start()
 
-        # test redo
         elif command == 'r':
             system('cls')
             try:
@@ -311,7 +310,7 @@ class Game:
                 self.start()
             except IndexError:
                 return None
-        # test
+
         elif command == '?':
             print('Hint: {}'.format(self._hint))
             input('Press any key to continue...')
