@@ -1,7 +1,7 @@
 USAGE: pyramidCMD_UI.py
 
 In-game commands:
-  q - quitK
+  q - quit
   ng - new game
   n - next extra card
   x -  select extra card
