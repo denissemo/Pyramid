@@ -120,13 +120,13 @@ class DeckGenerator:
 def test():
     # ---------------- Test ----------------
     d = DeckGenerator()
-    # d.deck[0].status = True
-    # print(d.deck[0])
-    # d.shuffle()
-    # print(len(d))
-    # d.deck[0].rank = False
-    # c = Card('10', 'H')
-    # c.status = True
+    d.deck[0].status = True
+    print(d.deck[0])
+    d.shuffle()
+    print(len(d))
+    d.deck[0].rank = False
+    c = Card('10', 'H')
+    c.status = True
 
 
 if __name__ == '__main__':

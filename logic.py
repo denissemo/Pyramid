@@ -97,6 +97,7 @@ class GameLogic:
     @staticmethod
     def hint(current_add_card, open_cards):
         """Return cards which can be compare.
+
         :param current_add_card: active card from additional deck
         :param open_cards: all opened cards from pyramid
         """
@@ -146,33 +147,21 @@ class GameLogic:
         self._level = level
 
 
-#
-# def test():
-#     d = DeckGenerator()
-#     # d.shuffle()
-#     t = TableCard(d)
-#     t.generate_pyramid()
-#     for i in t.pyramid_deck:
-#         for j in i:
-#             j.status = True
-#     print(t)
-#     for i in t.additional_deck.deck:
-#         i.status = True
-#         print(t.additional_deck.deck.index(i), i)
-#     gl = GameLogic(t)
-#     gl.compare_card(t.pyramid_deck[-1][5])
-#     gl.compare_card(t.additional_deck.deck[12])
-#     print(t)
-#     for i in t.additional_deck.deck:
-#         i.status = True
-#         print(t.additional_deck.deck.index(i), i)
-#     # t = gl.redo_changes()
-#     # print(gl.table.pyramid_deck[-1][5])
-#     print(t)
-#     for i in t.additional_deck.deck:
-#         i.status = True
-#         print(t.additional_deck.deck.index(i), i)
-#
-#
-# if __name__ == '__main__':
-#     test()
+def test():
+    # ---------------- Test ----------------
+    d = DeckGenerator()
+    d.shuffle()
+    t = TableCard(d)
+    t.generate_pyramid()
+    for i in t.pyramid_deck:
+        for j in i:
+            j.status = True
+    print(t)
+    for i in t.additional_deck.deck:
+        i.status = True
+        print(t.additional_deck.deck.index(i), i)
+    gl = GameLogic(t)
+
+
+if __name__ == '__main__':
+    test()

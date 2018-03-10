@@ -72,18 +72,17 @@ class TableCard:
 
 def test():
     # ---------------- Test ----------------
-    # d = DeckGenerator()
-    # d.shuffle()
-    # t = TableCard(d)
-    # t.generate_pyramid()
-    # c = p.pyramid_deck[1][1]
-    # del p[c]
-    # print(t)
+    d = DeckGenerator()
+    d.shuffle()
+    t = TableCard(d)
+    t.generate_pyramid()
+    c = p.pyramid_deck[1][1]
+    del p[c]
+    print(t)
 
-    # for i in p.pyramid_deck[-1]:
-    #     i.open()
-    # print(p)
-    pass
+    for i in p.pyramid_deck[-1]:
+        i.open()
+    print(p)
 
 
 if __name__ == '__main__':
