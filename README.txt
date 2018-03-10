@@ -10,6 +10,7 @@ In-game commands:
   d - debug mode on/off
   lvl - select game mode (Easy/Hard)
   r - redo changes
+  ? - show hint
 
 GAMEPLAY
   The object of this game is to uncover all the cards (#)

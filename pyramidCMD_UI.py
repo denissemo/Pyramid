@@ -7,6 +7,7 @@ from logic import GameLogic
 import shutil
 from os import system
 from sys import exit
+from itertools import combinations
 
 
 class Game:
@@ -32,9 +33,9 @@ class Game:
         # current pyramid card indexes
         self._indexes = [self._p_s.index(card) for card in self._p_s]
         self._supported_commands = ['ng', 'n', 'q', 'x', 'c', 'h', 'lvl', 'd',
-                                    'r']
+                                    'r', '?']
         self._debug_bool = False  # for debugging
-        self._level = 'easy'
+        self._level = 'easy'  # current game mode
 
     @property
     def _p_s(self):
@@ -63,6 +64,36 @@ class Game:
                         self._pyramid[row - 1][item - 1].status:
                     self._pyramid[row - 1][item - 1].status = False
 
+    @property
+    def _hint(self):
+        """Return cards which can be compare.
+
+        :return str index: 'x' if add card, '0...n' if card from pyramid;
+                           '1 5' or 'x 4' if coincided two card.
+        """
+        # additional card are always last in this list
+        open_cards = self._p_s
+        open_cards.append(self._add_card)
+        all_cards = open_cards
+        for card in all_cards:
+            if card.value == 13:
+                return 'x' if all_cards.index(card) == len(all_cards)-1 else \
+                    str(all_cards.index(card))
+        # all possible card combinations (tuple)
+        comb = combinations(all_cards, 2)  # (1, 2), (1, 3), ...
+        len_ = len(all_cards)
+        for item in comb:
+            fst_card = item[0]
+            snd_card = item[1]
+            if sum([fst_card.value, snd_card.value]) == 13:
+                if all_cards.index(fst_card) == len_-1:
+                    return '{} {}'.format('x', str(all_cards.index(snd_card)))
+                elif all_cards.index(snd_card) == len_-1:
+                    return '{} {}'.format('x', str(all_cards.index(fst_card)))
+                else:
+                    return '{} {}'.format(str(all_cards.index(fst_card)),
+                                          str(all_cards.index(snd_card)))
+
     def instruction(self):
         """Return game instruction."""
         text = '###############################\n' \
@@ -87,6 +118,7 @@ class Game:
                '#  d - debug mode on/off      #\n' \
                '#  lvl - select game mode     #\n' \
                '#  r - redo changes           #\n' \
+               '#  ? - show hint              #\n' \
                '#                             #\n' \
                '#         MODE: {}          #\n' \
                '###############################\n'.format(self._gl.level)
@@ -279,6 +311,12 @@ class Game:
                 self.start()
             except IndexError:
                 return None
+        # test
+        elif command == '?':
+            print('Hint: {}'.format(self._hint))
+            input('Press any key to continue...')
+            system('cls')
+            self.start()
 
     def start(self):
         """Main game class start here."""

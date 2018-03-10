@@ -39,7 +39,8 @@ class GameLogic:
         # if card in pyramid deck
         for row in self._table_obj.pyramid_deck:
             if card_obj in row:
-                return self._table_obj.pyramid_deck.index(row), row.index(card_obj)
+                return self._table_obj.pyramid_deck.index(row), \
+                       row.index(card_obj)
 
     def _del_card(self, card_obj):
         """Mark card as None."""
@@ -67,6 +68,7 @@ class GameLogic:
         :returns: card, card_index, card_type """
         last_del_elem = self._history.pop()  # dict
         card_type = list(last_del_elem.keys())[0]  # add_deck or pyramid_deck
+                                                   # or stack (str)
         card = self._changes[card_type].pop()  # card obj
         card_index = last_del_elem[card_type]  # index of returned card
         return {'card': card, 'card_index': card_index, 'card_type': card_type}
@@ -93,20 +95,6 @@ class GameLogic:
                 raise ValueError('sum of values is not 13')
         else:
             raise ValueError('one of the cards is closed')
-
-    @staticmethod
-    def hint(current_add_card, open_cards):
-        """Return cards which can be compare.
-
-        :param current_add_card: active card from additional deck
-        :param open_cards: all opened cards from pyramid
-        """
-        assert isinstance(current_add_card, Card), 'incorrect Card object'
-        assert isinstance(open_cards, list), 'open_cards parameter ' \
-                                             'must be in list type'
-
-
-
 
     @property
     def table(self):
