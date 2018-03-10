@@ -34,6 +34,7 @@ class Game:
         self._supported_commands = ['ng', 'n', 'q', 'x', 'c', 'h', 'lvl', 'd',
                                     'r']
         self._debug_bool = False  # for debugging
+        self._level = 'easy'
 
     @property
     def _p_s(self):
@@ -150,14 +151,14 @@ class Game:
         for c in self._p_s:
             print('{} = {}:{}'.format(self._p_s.index(c), c.rank, c.suit))
 
-    @staticmethod
-    def _start_new_game():
+    def _start_new_game(self):
         """Start new game, with new objects."""
         D = DeckGenerator()
         D.shuffle()
         T = TableCard(D)
         T.generate_pyramid()
         gL = GameLogic(T)
+        gL.level = self._level
         for item in T.pyramid_deck[-1]:
             item.status = True
         return Game(D, T, gL)
