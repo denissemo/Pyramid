@@ -270,10 +270,13 @@ class Game:
             else:
                 self._debug_bool = True
         elif command == 'lvl':
-            enter_lvl = input('Enter level [easy, hard]: ').strip()
-            self._level = enter_lvl
-            system('cls')
-            self._start_new_game().start()
+            try:
+                enter_lvl = input('Enter level [easy, hard]: ').strip()
+                self._level = enter_lvl
+                system('cls')
+                self._start_new_game().start()
+            except AssertionError:
+                return None
 
         elif command == 'r':
             system('cls')
