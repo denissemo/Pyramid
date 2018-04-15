@@ -104,7 +104,6 @@ class Pyramid(QMainWindow):
         if event.x() in range(self.addCardRightF.x(), self.addCardRightF.x() + self.width) and \
                 event.y() in range(self.addCardRightF.y(), self.addCardRightF.y() + self.height):
             # add card press
-            print('stock')
             try:
                 self.card_ = self.g_logic.card_stack[-1]
             except IndexError:
