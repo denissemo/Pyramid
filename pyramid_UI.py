@@ -8,7 +8,7 @@ from deck import Card
 from deck import DeckGenerator
 from table import TableCard
 from logic import GameLogic
-import background_rc
+import resours_rc
 
 
 class Pyramid(QMainWindow):
@@ -16,8 +16,7 @@ class Pyramid(QMainWindow):
         super().__init__()
         self.ui = uic.loadUi('pyramid.ui')
         self.ui.setWindowTitle('Pyramid Solitaire')
-        self.ui.setWindowIcon(QIcon(os.path.join('images', 'main_window_icon.'
-                                                           'png')))
+        self.ui.setWindowIcon(QIcon(':/images/images/main_window_icon.png'))
         # -- Card size
         self.width = self.ui.label_00.width()  # 80 px
         self.height = self.ui.label_00.height()  # 116 px
@@ -63,9 +62,10 @@ class Pyramid(QMainWindow):
         self.addCardRightF.mouseMoveEvent = self.mouseMoveEvent
         self.addCardRightF.mouseReleaseEvent = self.mouseReleaseEvent
         self.addCardLeft.setPixmap(
-            QPixmap('images/back.png'))
+            QPixmap(':/images/images/back.png'))
         self.addCardRightF.setVisible(False)  # by default - hide
-        self.addCardRightB.setPixmap(QPixmap('images/transparent_back.png'))
+        self.addCardRightB.setPixmap(QPixmap(':/images/images/transparent_back'
+                                             '.png'))
         # set event for all labels
         for lbl in self.cards_labels:
             lbl.mouseMoveEvent = self.mouseMoveEvent
@@ -93,10 +93,11 @@ class Pyramid(QMainWindow):
         if len(self.g_logic.card_stack) > 1:
             self.addCardRightB.setPixmap(self.g_logic.card_stack[-2].pixmap)
         if not self.g_logic.card_stack:
-            self.addCardLeft.setPixmap(QPixmap('images/transparent_back.png'))
-            self.addCardRightF.setPixmap(QPixmap('images/back.png'))
+            self.addCardLeft.setPixmap(QPixmap(':/images/images/transparent_'
+                                               'back.png'))
+            self.addCardRightF.setPixmap(QPixmap(':/images/images/back.png'))
         else:
-            self.addCardLeft.setPixmap(QPixmap('images/back.png'))
+            self.addCardLeft.setPixmap(QPixmap(':/images/images/back.png'))
 
     def mousePressEvent(self, event):
         print('press')
@@ -198,7 +199,12 @@ class Pyramid(QMainWindow):
             self.ui.close()
 
     def show_game_over_message(self):
-        reply = QMessageBox.information(self, 'Game over', 'Congratulation!', QMessageBox.Ok, QMessageBox.Ok)
+        reply = QMessageBox()
+        reply.setInformativeText('Whoops...\nYou win this game!')
+        reply.setWindowTitle('Game Over')
+        reply.setStandardButtons(QMessageBox.Ok)
+        reply.setWindowIcon(QIcon(':/images/images/main_window_icon.png'))
+        reply.exec_()
         self.start_new_game()
 
     def cheat(self):

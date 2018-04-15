@@ -2,6 +2,12 @@
 Created on: 18.02.2018
 """
 from random import shuffle
+import sys
+from PyQt5.QtWidgets import QLabel, QGraphicsPixmapItem, QGraphicsItem, QApplication
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+import resours_rc
+import os
 
 
 class Card:
@@ -28,6 +34,21 @@ class Card:
         self._suit = suit
         self._status = status
         self._value = self.RANKS.index(rank) + 1  # set card value (1-13)
+        self._face = None  # face of card
+        self._back = None  # back of card
+
+        self._load_images()
+
+    def _load_images(self):
+        self._face = QPixmap(':/cards/cards/{}_{}.png'.format(self._rank, self._suit))
+        self._back = QPixmap(':/images/images/back.png')
+
+    @property
+    def pixmap(self):
+        if self._status:
+            return self._face
+        else:
+            return self._back
 
     @property
     def rank(self):
@@ -119,14 +140,13 @@ class DeckGenerator:
 
 def test():
     # ---------------- Test ----------------
+    app = QApplication(sys.argv)
     d = DeckGenerator()
-    d.deck[0].status = True
     print(d.deck[0])
     d.shuffle()
     print(len(d))
-    d.deck[0].rank = False
     c = Card('10', 'H')
-    c.status = True
+    print(c)
 
 
 if __name__ == '__main__':

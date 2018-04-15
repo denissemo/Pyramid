@@ -33,7 +33,7 @@ class Game:
         # current pyramid card indexes
         self._indexes = [self._p_s.index(card) for card in self._p_s]
         self._supported_commands = ['ng', 'n', 'q', 'x', 'c', 'h', 'lvl', 'd',
-                                    'r', '?']
+                                    'r', '?', 'cheat']
         self._debug_bool = False  # for debugging
         self._level = 'easy'  # current game mode
 
@@ -320,6 +320,14 @@ class Game:
             system('cls')
             self.start()
 
+        # mama ama kriminal
+        elif command == 'cheat':
+            for row in self._pyramid:
+                for card in row:
+                    card.rank = None
+            system('cls')
+            self.start()
+
     def start(self):
         """Main game class start here."""
         while self._pyramid[0][0].rank is not None:  # if top card is not None
@@ -334,7 +342,7 @@ class Game:
             print(game.instruction())
             input('Press any key to continue...')  # wait user
             system('cls')
-            self.start()
+            self._start_new_game().start()
 
 
 d = DeckGenerator()  # create deck

@@ -35,7 +35,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/newPrefix/images/background.png);</string>
+   <string notr="true">background-image: url(:/images/images/background.png);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -879,6 +879,10 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew_Game">
+   <property name="icon">
+    <iconset resource="resours.qrc">
+     <normaloff>:/images/images/new_game_icon.png</normaloff>:/images/images/new_game_icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;New Game</string>
    </property>
@@ -887,6 +891,10 @@
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="resours.qrc">
+     <normaloff>:/images/images/exit_icon.png</normaloff>:/images/images/exit_icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Exit</string>
    </property>
@@ -901,7 +909,7 @@
   </action>
  </widget>
  <resources>
-  <include location="background.qrc"/>
+  <include location="resours.qrc"/>
  </resources>
  <connections/>
 </ui>

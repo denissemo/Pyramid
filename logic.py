@@ -47,16 +47,16 @@ class GameLogic:
         assert isinstance(card_obj, Card), 'incorrect Card object'
 
         # add copy Card object
-        if self._table_obj.isPyramidCard(card_obj):
-            self._changes['pyramid_deck'].append(copy.deepcopy(card_obj))
-            self._history.append({'pyramid_deck': self.cardIndex(card_obj)})
-        else:
-            if card_obj in self._card_stack:
-                self._changes['stack'].append(copy.deepcopy(card_obj))
-                self._history.append({'stack': self.cardIndex(card_obj)})
-            else:
-                self._changes['add_deck'].append(copy.deepcopy(card_obj))
-                self._history.append({'add_deck': self.cardIndex(card_obj)})
+        # if self._table_obj.isPyramidCard(card_obj):
+        #     self._changes['pyramid_deck'].append(copy.deepcopy(card_obj))
+        #     self._history.append({'pyramid_deck': self.cardIndex(card_obj)})
+        # else:
+        #     if card_obj in self._card_stack:
+        #         self._changes['stack'].append(copy.deepcopy(card_obj))
+        #         self._history.append({'stack': self.cardIndex(card_obj)})
+        #     else:
+        #         self._changes['add_deck'].append(copy.deepcopy(card_obj))
+        #         self._history.append({'add_deck': self.cardIndex(card_obj)})
 
         card_obj.rank = None
         card_obj.suit = None
@@ -68,7 +68,7 @@ class GameLogic:
         :returns: card, card_index, card_type """
         last_del_elem = self._history.pop()  # dict
         card_type = list(last_del_elem.keys())[0]  # add_deck or pyramid_deck
-                                                   # or stack (str)
+        # or stack (str)
         card = self._changes[card_type].pop()  # card obj
         card_index = last_del_elem[card_type]  # index of returned card
         return {'card': card, 'card_index': card_index, 'card_type': card_type}

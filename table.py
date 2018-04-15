@@ -3,10 +3,11 @@ Created on: 18.02.2018
 """
 from deck import DeckGenerator
 from deck import Card
+from PyQt5.QtWidgets import QApplication
 
 
 class TableCard:
-    """Contain pyramid deck and additional deck."""
+    """Contain pyramid deck and addition~al deck."""
 
     def __init__(self, deck):
         """
@@ -34,6 +35,16 @@ class TableCard:
     def pyramid_deck(self):
         """Return pyramid list."""
         return self._pyramid
+
+    @property
+    def pyramid_deck_linear(self):
+        """Pyramid in linear list form."""
+        tmp = []
+        if self._pyramid:
+            for r in self._pyramid:
+                for c in r:
+                    tmp.append(c)
+        return tmp
 
     def isPyramidCard(self, card_obj):
         """Check if is a Card object.
@@ -72,10 +83,14 @@ class TableCard:
 
 def test():
     # ---------------- Test ----------------
+    import sys
+    app = QApplication(sys.argv)
     d = DeckGenerator()
     d.shuffle()
     t = TableCard(d)
     t.generate_pyramid()
+    print(t.pyramid_deck_linear)
+    print(t.pyramid_deck[0][0])
 
 
 if __name__ == '__main__':
